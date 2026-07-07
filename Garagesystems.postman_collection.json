@@ -1,0 +1,140 @@
+{
+  "info": {
+    "_postman_id": "4f4e6b06-2ec8-4b8c-a3e2-3d9d8c0ff8b7",
+    "name": "Garagesystems API",
+    "description": "Postman collection for the Garagesystems in-memory parking API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Park Vehicle",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"plateNumber\": \"34ABC34\",\n  \"ownerName\": \"Alice\",\n  \"vehicleType\": \"CAR\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/garage/park",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "garage",
+            "park"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Find Vehicle",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/garage/find/34ABC34",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "garage",
+            "find",
+            "34ABC34"
+          ]
+        }
+      }
+    },
+    {
+      "name": "List Vehicles",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/garage/vehicles",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "garage",
+            "vehicles"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Garage Status",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/garage/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "garage",
+            "status"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Available Capacity",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/garage/available",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "garage",
+            "available"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Occupied Capacity",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/garage/occupied",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "garage",
+            "occupied"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Remove Vehicle",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/garage/remove/34ABC34",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "garage",
+            "remove",
+            "34ABC34"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
