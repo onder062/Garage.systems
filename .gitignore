@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### SQLite ###
+garage.db
+test-garage*
