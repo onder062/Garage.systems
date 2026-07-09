@@ -1,0 +1,52 @@
+<section class="page-header">
+  <h1>Dashboard</h1>
+  <p>Garage occupancy overview</p>
+</section>
+
+@if (loading()) {
+  <div class="loading-state">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+} @else if (status(); as garageStatus) {
+  <div class="stats-grid">
+    <mat-card class="stat-card total">
+      <mat-card-content>
+        <mat-icon>grid_view</mat-icon>
+        <div>
+          <span class="label">Total Slots</span>
+          <span class="value">{{ garageStatus.capacity }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card occupied">
+      <mat-card-content>
+        <mat-icon>local_parking</mat-icon>
+        <div>
+          <span class="label">Occupied Slots</span>
+          <span class="value">{{ garageStatus.occupiedSlots }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card available">
+      <mat-card-content>
+        <mat-icon>check_circle</mat-icon>
+        <div>
+          <span class="label">Available Slots</span>
+          <span class="value">{{ garageStatus.availableSlots }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card vehicles">
+      <mat-card-content>
+        <mat-icon>directions_car</mat-icon>
+        <div>
+          <span class="label">Parked Vehicles</span>
+          <span class="value">{{ garageStatus.parkedVehicles.length }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+}

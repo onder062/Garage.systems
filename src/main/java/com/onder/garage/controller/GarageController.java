@@ -7,8 +7,6 @@ import com.onder.garage.dto.ParkVehicleRequest;
 import com.onder.garage.dto.ParkVehicleResponse;
 import com.onder.garage.dto.VehicleResponse;
 import com.onder.garage.service.GarageService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;
@@ -30,7 +28,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/garage", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
-@Tag(name = "Garage", description = "Vehicle parking, removal, and garage capacity operations")
 public class GarageController {
     private final GarageService garageService;
 
@@ -38,43 +35,57 @@ public class GarageController {
         this.garageService = garageService;
     }
 
-    @Operation(summary = "Park a vehicle", description = "Allocates the nearest consecutive available slots with a one-slot buffer between vehicles")
+    /**
+     * Parks a vehicle using nearest consecutive available slots.
+     */
     @PostMapping("/park")
     public ResponseEntity<ParkVehicleResponse> parkVehicle(@Valid @RequestBody ParkVehicleRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(garageService.parkVehicle(request));
     }
 
-    @Operation(summary = "Remove a vehicle", description = "Removes a parked vehicle by plate number and frees its allocated slots")
+    /**
+     * Removes a parked vehicle by plate number and frees allocated slots.
+     */
     @DeleteMapping("/remove/{plate}")
     public ResponseEntity<VehicleResponse> removeVehicle(@PathVariable @NotBlank String plate) {
         return ResponseEntity.ok(garageService.removeVehicle(plate));
     }
 
-    @Operation(summary = "Garage status", description = "Returns capacity, occupied/available slots, and all parked vehicles with slot numbers")
+    /**
+     * Returns capacity, occupied slots, available slots, and parked vehicles.
+     */
     @GetMapping("/status")
     public ResponseEntity<GarageStatusResponse> getGarageStatus() {
         return ResponseEntity.ok(garageService.getGarageStatus());
     }
 
-    @Operation(summary = "List parked vehicles", description = "Returns all currently parked vehicles with their allocated slot numbers")
+    /**
+     * Returns all currently parked vehicles.
+     */
     @GetMapping("/vehicles")
     public ResponseEntity<List<VehicleResponse>> getVehicles() {
         return ResponseEntity.ok(garageService.getAllVehicles());
     }
 
-    @Operation(summary = "Find a vehicle", description = "Looks up a parked vehicle by plate number")
+    /**
+     * Finds a parked vehicle by plate number.
+     */
     @GetMapping("/find/{plate}")
     public ResponseEntity<VehicleResponse> findVehicle(@PathVariable @NotBlank String plate) {
         return ResponseEntity.ok(garageService.findVehicle(plate));
     }
 
-    @Operation(summary = "Available capacity", description = "Returns the number of currently unoccupied parking slots")
+    /**
+     * Returns currently available slot count.
+     */
     @GetMapping("/available")
     public ResponseEntity<AvailableSlotsResponse> getAvailableCapacity() {
         return ResponseEntity.ok(new AvailableSlotsResponse(garageService.getRemainingCapacity()));
     }
 
-    @Operation(summary = "Occupied capacity", description = "Returns the number of currently occupied parking slots")
+    /**
+     * Returns currently occupied slot count.
+     */
     @GetMapping("/occupied")
     public ResponseEntity<OccupiedSlotsResponse> getOccupiedCapacity() {
         return ResponseEntity.ok(new OccupiedSlotsResponse(garageService.getOccupiedCapacity()));

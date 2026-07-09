@@ -1,0 +1,19 @@
+.form-card {
+  max-width: 560px;
+}
+
+.park-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+
+  button {
+    align-self: flex-start;
+    min-width: 160px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,42 @@
+<section class="page-header">
+  <h1>Garage Status</h1>
+  <p>Visual layout of all parking slots.</p>
+</section>
+
+<div class="legend">
+  <span class="legend-item occupied">Occupied</span>
+  <span class="legend-item available">Available</span>
+  <span class="legend-item buffer">Buffer</span>
+</div>
+
+@if (loading()) {
+  <div class="loading-state">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+} @else {
+  <div class="slots-grid">
+    @for (slot of slots(); track slot.slotNumber) {
+      <mat-card
+        class="slot-card"
+        [class.occupied]="slot.status === 'occupied'"
+        [class.available]="slot.status === 'available'"
+        [class.buffer]="slot.status === 'buffer'"
+        [matTooltip]="slot.vehicle ? slotTooltip(slot.vehicle) : (slot.status === 'buffer' ? 'Buffer slot (required gap)' : 'Available slot')"
+      >
+        <mat-card-content>
+          <span class="slot-number">#{{ slot.slotNumber }}</span>
+          @if (slot.status === 'occupied' && slot.vehicle) {
+            <mat-icon>directions_car</mat-icon>
+            <span class="plate">{{ slot.vehicle.plateNumber }}</span>
+          } @else if (slot.status === 'buffer') {
+            <mat-icon>pause</mat-icon>
+            <span class="label">Buffer</span>
+          } @else {
+            <mat-icon>check</mat-icon>
+            <span class="label">Free</span>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+}

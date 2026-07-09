@@ -1,0 +1,43 @@
+<section class="page-header">
+  <h1>Park Vehicle</h1>
+  <p>Register a new vehicle and allocate parking slots.</p>
+</section>
+
+<mat-card class="form-card">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="park-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Plate Number</mat-label>
+        <input matInput formControlName="plateNumber" placeholder="34ABC34" />
+        @if (form.controls.plateNumber.touched && form.controls.plateNumber.hasError('required')) {
+          <mat-error>Plate number is required</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Owner Name</mat-label>
+        <input matInput formControlName="ownerName" placeholder="Alice" />
+        @if (form.controls.ownerName.touched && form.controls.ownerName.hasError('required')) {
+          <mat-error>Owner name is required</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Vehicle Type</mat-label>
+        <mat-select formControlName="vehicleType">
+          @for (type of vehicleTypes; track type) {
+            <mat-option [value]="type">{{ type }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" [disabled]="submitting()">
+        @if (submitting()) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          Park Vehicle
+        }
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -23,13 +23,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Lock-based garage service with consecutive-slot allocation.
  */
 @Service
-@Transactional
 public class GarageServiceImpl implements GarageService {
 
     private final GarageRepository garageRepository;
@@ -76,8 +74,8 @@ public class GarageServiceImpl implements GarageService {
                     .vehicle(vehicle)
                     .build();
 
-            garageRepository.saveVehicle(vehicle);
             occupySpots(allocatedSpots, vehicle);
+            garageRepository.saveVehicle(vehicle);
             garageRepository.saveTicket(ticket);
 
             return new ParkVehicleResponse(

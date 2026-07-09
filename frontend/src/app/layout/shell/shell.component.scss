@@ -1,0 +1,44 @@
+.shell-container {
+  min-height: 100vh;
+}
+
+.shell-sidenav {
+  width: 260px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  mat-icon {
+    color: #1565c0;
+  }
+}
+
+.active-link {
+  background: rgba(21, 101, 192, 0.08);
+  color: #1565c0;
+}
+
+.top-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.page-content {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 1rem;
+  }
+}

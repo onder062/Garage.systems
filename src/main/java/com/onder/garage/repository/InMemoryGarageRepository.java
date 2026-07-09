@@ -12,10 +12,12 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.springframework.stereotype.Repository;
 
 /**
- * Thread-safe in-memory repository implementation for unit tests.
+ * Thread-safe in-memory repository implementation.
  */
+@Repository
 public class InMemoryGarageRepository implements GarageRepository {
 
     private final AtomicInteger ticketSequence = new AtomicInteger(0);
